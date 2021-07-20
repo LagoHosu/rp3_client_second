@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-759" y="94"/>
         </scene>
-        <!--View Controller-->
+        <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="secondAssignment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="secondAssignment" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,6 +71,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Check!"/>
                                 <connections>
+                                    <action selector="goToVC2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ZT-Vy-xgW"/>
                                     <segue destination="lGC-Su-0bE" kind="show" id="3NE-1F-LtJ"/>
                                 </connections>
                             </button>
@@ -106,10 +107,10 @@
             </objects>
             <point key="canvasLocation" x="51" y="94"/>
         </scene>
-        <!--View Controller2-->
+        <!--ViewController2-->
         <scene sceneID="Bmq-97-ceE">
             <objects>
-                <viewController id="lGC-Su-0bE" customClass="ViewController2" customModule="secondAssignment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController2" title="ViewController2" id="lGC-Su-0bE" customClass="ViewController2" customModule="secondAssignment" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dfv-F8-kBE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,16 +121,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOx-T2-gS0">
+                                <rect key="frame" x="186" y="488.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ty3-EX-Qih"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="QOx-T2-gS0" firstAttribute="centerX" secondItem="ExD-Qq-6mF" secondAttribute="centerX" id="5sn-Tm-A0u"/>
+                            <constraint firstItem="QOx-T2-gS0" firstAttribute="top" secondItem="ExD-Qq-6mF" secondAttribute="bottom" constant="30" id="AU5-PF-lwM"/>
                             <constraint firstItem="ExD-Qq-6mF" firstAttribute="centerX" secondItem="Dfv-F8-kBE" secondAttribute="centerX" id="n7f-k4-ubk"/>
                             <constraint firstItem="ExD-Qq-6mF" firstAttribute="centerY" secondItem="Dfv-F8-kBE" secondAttribute="centerY" id="xfP-La-SN8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RV2-6B-tg6"/>
                     <connections>
+                        <outlet property="locationLabel" destination="QOx-T2-gS0" id="KUv-yL-CZ7"/>
                         <outlet property="timeLabel" destination="ExD-Qq-6mF" id="Qvj-vV-XL5"/>
                     </connections>
                 </viewController>
@@ -137,10 +147,10 @@
             </objects>
             <point key="canvasLocation" x="996" y="-151"/>
         </scene>
-        <!--View Controller3-->
+        <!--ViewController3-->
         <scene sceneID="yYT-cT-GQT">
             <objects>
-                <viewController id="X04-fo-FnD" customClass="ViewController3" customModule="secondAssignment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController3" title="ViewController3" id="X04-fo-FnD" customClass="ViewController3" customModule="secondAssignment" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oNl-G6-GGN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,6 +177,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hvQ-kY-hl7"/>
+                    <connections>
+                        <outlet property="pickCity2" destination="SBJ-Bf-BdJ" id="xjV-Aj-Fck"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKc-np-a4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

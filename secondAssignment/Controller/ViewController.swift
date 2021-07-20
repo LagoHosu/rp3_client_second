@@ -12,8 +12,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet var pickCity: UIPickerView!
     @IBOutlet weak var currentLocation: UILabel!
     
+    var selectedCity : String = ""
+    
     
     //MARK: - pickerView setting
+    
     lazy var pickerView: UIPickerView = {
         // Generate UIPickerView.
         pickCity = UIPickerView()
@@ -33,7 +36,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return pickCity
     }()
     
-    let cities = TimeZone.knownTimeZoneIdentifiers
+    var cities = TimeZone.knownTimeZoneIdentifiers
         
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -51,13 +54,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     // A method called when the picker is selected.
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.cities[row] = cities[row]
         print("row: \(row)")
         print("value: \(cities[row])")
-        print()
+        selectedCity = cities[row]
+        print(selectedCity)
+    }
+    
+    //MARK: - datapass
+    
+    @IBAction func goToVC2(_ sender: UIButton) {
+//        let ViewController2 = self.storyboard?.instantiateViewController(withIdentifier: "ViewController2") as! ViewController2
+//        
+//        ViewController2.resultCity = selectedCity
+//        print(selectedCity)
+//        print(ViewController2.resultCity)
         
     }
     
-        
+    //위에거는 안되고 아래거는 되는 이유,,? 흠
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is ViewController2 {
+            let vc = segue.destination as? ViewController2
+            vc?.resultCity = selectedCity
+        }
+    }
         
         
         //MARK: - life cycle functions
@@ -69,9 +91,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             self.view.addSubview(self.pickerView)
             currentLocation.text = "Seoul"
-//            currentLocation.layer.borderWidth = 1
-//            currentLocation.layer.borderColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-            
+
         }
     
     override func viewWillAppear(_ animated: Bool) {
