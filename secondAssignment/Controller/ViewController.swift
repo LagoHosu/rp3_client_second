@@ -10,9 +10,13 @@ import UIKit
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     //@IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet var pickCity: UIPickerView!
-    @IBOutlet weak var currentLocation: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     var selectedCity : String = ""
+    var standardLocation : String = "Asia/Seoul"
+    var timeInLocation : String = ""
+    
     
     
     //MARK: - pickerView setting
@@ -32,12 +36,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         // Set the dataSource.
         pickCity.dataSource = self
-
+        
         return pickCity
     }()
     
     var cities = TimeZone.knownTimeZoneIdentifiers
-        
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -58,44 +62,105 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print("row: \(row)")
         print("value: \(cities[row])")
         selectedCity = cities[row]
-        print(selectedCity)
     }
     
-    //MARK: - datapass
+    //MARK: - datapass to VC2
     
     @IBAction func goToVC2(_ sender: UIButton) {
-//        let ViewController2 = self.storyboard?.instantiateViewController(withIdentifier: "ViewController2") as! ViewController2
-//        
-//        ViewController2.resultCity = selectedCity
-//        print(selectedCity)
-//        print(ViewController2.resultCity)
+        //        let ViewController2 = self.storyboard?.instantiateViewController(withIdentifier: "ViewController2") as! ViewController2
+        //
+        //        ViewController2.resultCity = selectedCity
+        //        print(selectedCity)
+        //        print(ViewController2.resultCity)
         
     }
     
-    //위에거는 안되고 아래거는 되는 이유,,? 흠
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is ViewController2 {
             let vc = segue.destination as? ViewController2
             vc?.resultCity = selectedCity
+            vc?.timeInMyLocation = date2
+            
+            
         }
     }
+    
+    
+    //MARK: - dapatass from VC3
+    
+    
+    var delegate: ViewController3?
+    
+    
+    
+    @IBAction func unwindToViewController(_ unwindSegue: UIStoryboardSegue) {
+        //        let sourceViewController = unwindSegue.source
+        //        // Use data from the view controller which initiated the unwind segue
+        //        performSegue(withIdentifier: "unwindToViewController", sender: self)
+        //        sourceViewController.selected
         
-        
-        //MARK: - life cycle functions
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            // Do any additional setup after loading the view.
-            print("vc1 viewDidLoad")
+        if let changedLocation = unwindSegue.source as? ViewController3 {
+            locationLabel.text = "in \(changedLocation.selectedCity)"
+            standardLocation = changedLocation.selectedCity
             
-            self.view.addSubview(self.pickerView)
-            currentLocation.text = "Seoul"
-
         }
+        
+    }
+    
+    
+    
+    //MARK: - timezone setting
+    
+    var date: String {
+        get{
+            let date = Date()
+            let df = DateFormatter()
+            df.locale = Locale(identifier: "AU") //ko_KR
+            
+            df.timeZone = TimeZone(identifier: self.standardLocation)
+            //df.timeZone = TimeZone(abbreviation: "KST")
+            df.dateFormat = "dd, MMM yyyy"
+            
+            return df.string(from: date)
+        }
+    }
+    
+    //for time setting
+    var date2: String {
+        get {
+            let date = Date()
+            let df2 = DateFormatter()
+            df2.locale = Locale(identifier: "ko_KR")
+            df2.timeZone = TimeZone(identifier: self.standardLocation)
+            df2.dateFormat = "HH:mm"
+            
+            return df2.string(from: date)
+        }
+        
+    }
+    
+    func timeNow() {
+        timeLabel.text = "\(date2) on \(date)"
+        //        locationLabel.text = currentLocation
+    }
+    
+    //MARK: - life cycle functions
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        print("vc1 viewDidLoad")
+        
+        self.view.addSubview(self.pickerView)
+        timeNow()
+        locationLabel.text = "in \(standardLocation)"
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         print("vc1 viewWillAppear")
+        timeNow()
     }
     
     override func viewDidAppear(_ animated: Bool) {

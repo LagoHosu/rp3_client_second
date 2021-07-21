@@ -99,8 +99,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Pyn-di-nP2"/>
                     <connections>
-                        <outlet property="currentLocation" destination="WwV-bk-kG3" id="L40-zM-uAD"/>
+                        <outlet property="locationLabel" destination="vgg-6s-Hes" id="dMp-sd-qxT"/>
                         <outlet property="pickCity" destination="SoE-gC-bu7" id="hrQ-p0-C3o"/>
+                        <outlet property="timeLabel" destination="WwV-bk-kG3" id="ggM-rU-u0s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -127,12 +128,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vc9-nW-RaO">
+                                <rect key="frame" x="187.5" y="642.5" width="39.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ty3-EX-Qih"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QOx-T2-gS0" firstAttribute="centerX" secondItem="ExD-Qq-6mF" secondAttribute="centerX" id="5sn-Tm-A0u"/>
                             <constraint firstItem="QOx-T2-gS0" firstAttribute="top" secondItem="ExD-Qq-6mF" secondAttribute="bottom" constant="30" id="AU5-PF-lwM"/>
+                            <constraint firstItem="Vc9-nW-RaO" firstAttribute="centerX" secondItem="Dfv-F8-kBE" secondAttribute="centerX" id="Ups-PB-PDw"/>
+                            <constraint firstItem="ty3-EX-Qih" firstAttribute="bottom" secondItem="Vc9-nW-RaO" secondAttribute="bottom" constant="200" id="lxY-ER-sbQ"/>
                             <constraint firstItem="ExD-Qq-6mF" firstAttribute="centerX" secondItem="Dfv-F8-kBE" secondAttribute="centerX" id="n7f-k4-ubk"/>
                             <constraint firstItem="ExD-Qq-6mF" firstAttribute="centerY" secondItem="Dfv-F8-kBE" secondAttribute="centerY" id="xfP-La-SN8"/>
                         </constraints>
@@ -140,6 +149,7 @@
                     <navigationItem key="navigationItem" id="RV2-6B-tg6"/>
                     <connections>
                         <outlet property="locationLabel" destination="QOx-T2-gS0" id="KUv-yL-CZ7"/>
+                        <outlet property="timeDifference" destination="Vc9-nW-RaO" id="6V8-vp-z2I"/>
                         <outlet property="timeLabel" destination="ExD-Qq-6mF" id="Qvj-vV-XL5"/>
                     </connections>
                 </viewController>
@@ -164,6 +174,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqN-VC-E6S">
+                                <rect key="frame" x="192" y="732" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Set!"/>
+                                <connections>
+                                    <segue destination="U5D-mH-5M9" kind="unwind" identifier="unwindToViewController" unwindAction="unwindToViewController:" id="6fv-Gm-BXQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MTA-H3-56S"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -171,9 +189,11 @@
                             <constraint firstItem="SBJ-Bf-BdJ" firstAttribute="top" secondItem="EH4-bH-GGK" secondAttribute="bottom" constant="5" id="2tX-lu-cG2"/>
                             <constraint firstItem="SBJ-Bf-BdJ" firstAttribute="leading" secondItem="MTA-H3-56S" secondAttribute="leading" id="DfC-Lq-AnO"/>
                             <constraint firstItem="MTA-H3-56S" firstAttribute="trailing" secondItem="SBJ-Bf-BdJ" secondAttribute="trailing" id="QsQ-EZ-HWt"/>
+                            <constraint firstItem="IqN-VC-E6S" firstAttribute="centerX" secondItem="oNl-G6-GGN" secondAttribute="centerX" id="f3u-Pq-ICg"/>
                             <constraint firstItem="SBJ-Bf-BdJ" firstAttribute="centerY" secondItem="oNl-G6-GGN" secondAttribute="centerY" id="rwn-sS-rIH"/>
                             <constraint firstItem="EH4-bH-GGK" firstAttribute="centerX" secondItem="oNl-G6-GGN" secondAttribute="centerX" id="sWV-gg-cIc"/>
                             <constraint firstItem="SBJ-Bf-BdJ" firstAttribute="centerX" secondItem="oNl-G6-GGN" secondAttribute="centerX" id="vEL-bq-bor"/>
+                            <constraint firstItem="MTA-H3-56S" firstAttribute="bottom" secondItem="IqN-VC-E6S" secondAttribute="bottom" constant="100" id="zly-ZW-r7Z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hvQ-kY-hl7"/>
@@ -182,8 +202,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKc-np-a4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="U5D-mH-5M9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="996" y="492"/>
+            <point key="canvasLocation" x="995.65217391304361" y="491.51785714285711"/>
         </scene>
     </scenes>
     <resources>

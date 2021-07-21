@@ -8,9 +8,15 @@
 import UIKit
 //to select the current city
 
+protocol sendBackDelegate {
+    func dataRecieved(data: String)
+}
 
 class ViewController3: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet var pickCity2: UIPickerView!
+    
+    var delegate : sendBackDelegate?
+    var selectedCity = ""
     
     //MARK: - pickerView
     
@@ -53,8 +59,17 @@ class ViewController3: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("row: \(row)")
         print("value: \(cities[row])")
+        selectedCity = cities[row]
+
         
     }
+    
+    
+    //MARK: - datapass to VC1 w/ delegate
+    
+//    delegate!.dataReceived(data: selectedCity)
+    
+    
     
     //MARK: - Life cycle methods
     
